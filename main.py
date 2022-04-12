@@ -15,7 +15,7 @@ IG_PASS = os.getenv('IG_PASS')
 yt = Yt(API_KEY, CHANNEL_ID)
 ig = Ig(IG_LOGIN, IG_PASS)
 
-print(yt.get_yt_videos())
+videos = yt.get_yt_videos()
 
 for video in videos:
     video_date = datetime.strptime(video["snippet"]["publishTime"], "%Y-%m-%dT%H:%M:%SZ")
