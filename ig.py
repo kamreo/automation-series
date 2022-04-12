@@ -22,7 +22,7 @@ class Ig:
         return self.bot.get_your_medias()
 
     def create_ig_post(self, title, photo, fileName, videoUrl):
-        self.bot.login(username = self.login, password = self.password)
+        self.bot.login(username = self.login, password = self.password, ask_for_code=True)
         sleep(4)
         r = requests.get(photo, allow_redirects=True)
         open(fileName, 'wb').write(r.content)
