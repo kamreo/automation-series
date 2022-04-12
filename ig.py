@@ -1,7 +1,8 @@
 from time import sleep
 from instabot import Bot
 import glob
-import os 
+import os
+import requests
 
 if os.path.isfile("config/file.json"):
     os.remove("config/file.json")
@@ -20,7 +21,9 @@ class Ig:
         sleep(2)
         return self.bot.get_your_medias()
 
-    def create_ig_post(self, title, photo, videoUrl):
+    def create_ig_post(self, title, photo, fileName, videoUrl):
         self.bot.login(username = self.login, password = self.password)
         sleep(4)
-        self.bot.upload_photo(photo, caption="New video "+ title + "uploaded on my channel. You can watch it here: " + videoUrl + "!")
+        r = requests.get(photo, allow_redirects=True)
+        open(fileName, 'wb').write(r.content)
+        self.bot.upload_photo(fileName, caption="New video "+ title + "uploaded on my channel. You can watch it here: " + videoUrl + "!")
